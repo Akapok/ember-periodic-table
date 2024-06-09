@@ -7,6 +7,10 @@
 body {
   display: flex;
   justify-content: center;
+  background-image: url("4840720.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100%;
 }
 
 .element {
