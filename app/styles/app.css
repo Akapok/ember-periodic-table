@@ -1,1 +1,24 @@
-/* Ember supports plain CSS out of the box. More info: https://cli.emberjs.com/release/advanced-use/stylesheets/ */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(18, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+}
+
+body {
+  display: flex;
+  justify-content: center;
+}
+
+.element {
+  background-color: #f1f1f1;
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.small {
+  font-size: 0.6rem;
+}
