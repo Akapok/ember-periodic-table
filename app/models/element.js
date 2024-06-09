@@ -1,4 +1,5 @@
 import Model, { attr } from '@ember-data/model';
+import { htmlSafe } from '@ember/template';
 
 export default class ElementModel extends Model {
   // generate attr for each element property
@@ -35,4 +36,10 @@ export default class ElementModel extends Model {
   @attr cpkHex;
   @attr image;
   @attr block;
+
+  get gridPosition() {
+    return htmlSafe(
+      `grid-row-start: ${this.ypos}; grid-column-start: ${this.xpos}`,
+    );
+  }
 }

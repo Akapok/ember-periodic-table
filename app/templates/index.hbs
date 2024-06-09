@@ -1,0 +1,13 @@
+<div class="grid">
+    {{#each this.model as |element|}}
+    <div class="element" style={{element.gridPosition}} data-test-element>
+        <div class="small" data-test-element-number>
+            {{element.number}}
+        </div>
+        <b data-test-element-symbol>{{element.symbol}}</b>
+        <div class="small" data-test-element-name>
+            {{element.name}}
+        </div>
+    </div>
+    {{/each}}
+</div>
