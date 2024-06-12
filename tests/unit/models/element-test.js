@@ -26,7 +26,6 @@ module('Unit | Model | element', function (hooks) {
     );
   });
 
-  // Test color property
   test('it has a correct color', function (assert) {
     let store = this.owner.lookup('service:store');
     let element = store.createRecord('element', {

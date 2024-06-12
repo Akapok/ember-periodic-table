@@ -1,22 +1,32 @@
+/* Layout */
+body {
+  background-image: url("4840720.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  font-family: monospace;
+}
+
+.footer {
+  text-align: right;
+  margin: 3rem 0;
+}
+
+/* Utils */
+.small {
+  font-size: 0.6rem;
+}
+
+/* Table Layout */
 .grid {
   display: grid;
   grid-template-columns: repeat(18, 1fr);
   grid-template-rows: repeat(8, 1fr);
 }
 
-body {
-  display: flex;
-  justify-content: center;
-  background-image: url("4840720.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  height: 100%;
-}
-
-.element-container {
-  padding: 3px;
-}
-
+/* Elements */
 .element {
   background-color: #d1cdcd;
   border-radius: 5px;
@@ -28,6 +38,6 @@ body {
   padding: 0.15rem;
 }
 
-.small {
-  font-size: 0.6rem;
+.element-container {
+  padding: 3px;
 }
