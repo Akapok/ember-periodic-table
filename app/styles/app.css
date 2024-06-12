@@ -13,14 +13,19 @@ body {
   height: 100%;
 }
 
+.element-container {
+  padding: 3px;
+}
+
 .element {
-  background-color: #f1f1f1;
+  background-color: #d1cdcd;
+  border-radius: 5px;
   width: 3rem;
   height: 3rem;
-  border: 1px solid red;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  padding: 0.15rem;
 }
 
 .small {
