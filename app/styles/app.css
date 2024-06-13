@@ -1,4 +1,9 @@
 /* Layout */
+html {
+  line-height: normal;
+  font-size: medium;
+}
+
 body {
   background-image: url("4840720.jpg");
   background-size: cover;
