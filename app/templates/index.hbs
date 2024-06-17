@@ -1,13 +1,8 @@
 <div>
-  <div class="row">
-    <div class="input-field col s6">
-        <Input @type="text" id="search" @value={{this.searchInput}} {{on "keyup" this.performSearch}}/>
-      <label class="active" for="search">Search</label>
-    </div>
-  </div>
-
-
     <div class="grid">
+        {{!-- template-lint-disable require-input-label --}}
+        <Input @type="text" class="browser-default searchbar" @value={{this.searchInput}} {{on "keyup" this.performSearch}}/>
+
         {{#each this.model as |element|}}
         <div class="element-container {{element.searchState}}" style={{element.gridPosition}} >
             <Element @element={{element}} {{on "click" (fn this.openElementDetails element)}} class="element-hover" />

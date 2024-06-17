@@ -80,6 +80,19 @@ body {
 }
 
 /* Element Search */
+.searchbar {
+  grid-row-start: 1;
+  grid-column-start: 13;
+  grid-column-end: 18;
+  height: 2rem;
+  border-radius: 1rem;
+  border: 1px solid grey;
+  margin: auto 1rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0px;
+}
+
 .highlighted {
   filter: drop-shadow(0 0 0.5rem #b0ad82);
 }
