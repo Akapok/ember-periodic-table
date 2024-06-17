@@ -1,7 +1,7 @@
 /* Layout */
 html {
-  line-height: normal;
-  font-size: medium;
+  line-height: normal !important;
+  font-size: medium !important;
 }
 
 body {
@@ -43,6 +43,28 @@ body {
   padding: 0.15rem;
 }
 
+.element-hover {
+  cursor: pointer;
+}
+
+.element-hover:hover {
+  transform: scale(1.2);
+  box-shadow: 5px 5px 10px 0px rgba(73, 73, 73, 0.5);
+}
+
 .element-container {
   padding: 3px;
+}
+
+/* Element Details */
+.sidenav {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  align-items: center;
+}
+
+.sidenav .element {
+  transform: scale(1.5);
+  margin: 2rem;
 }
