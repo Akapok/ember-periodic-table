@@ -49,7 +49,7 @@ body {
 
 .element-hover:hover {
   transform: scale(1.2);
-  box-shadow: 5px 5px 10px 0px rgba(73, 73, 73, 0.5);
+  box-shadow: 5px 5px 10px 0px rgb(73 73 73 / 50%); /* stylelint-disable-line length-zero-no-unit */
 }
 
 .element-container {
