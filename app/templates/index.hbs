@@ -2,7 +2,7 @@
     <div class="grid">
         {{#each this.model as |element|}}
         <div class="element-container" style={{element.gridPosition}}>
-            <Element @element={{element}} {{on "click" (fn this.openElementDetails element)}} class="element-hover"/>
+            <Element @element={{element}} {{on "click" (fn this.openElementDetails element)}} class="element-hover" />
         </div>
         {{/each}}
     </div>
@@ -10,17 +10,55 @@
 
     <div id="slide-out" class="sidenav" {{did-insert this.initSidenav}}>
         {{#if this.currentElement}}
-            <Element @element={{this.currentElement}} data-test-element-details/>
-            <div class="element-details">
+        <Element @element={{this.currentElement}} data-test-element-details />
+        <div class="element-details">
+
+            <div class="details-title">Description</div>
+            <div class="details">
                 <b>Name</b>
                 <p data-test-element-name>{{this.currentElement.name}}</p>
                 <b>Symbol</b>
                 <p data-test-element-symbol>{{this.currentElement.symbol}}</p>
-                <b>Summary</b>
-                <p data-test-element-summary>{{this.currentElement.summary}}</p>
+                <b>Number</b>
+                <p data-test-element-number>{{this.currentElement.number}}</p>
+                {{#if this.currentElement.appearance}}
+                    <b>Appearance</b>
+                    <p data-test-element-appearance>{{this.currentElement.appearance}}</p>
+                {{/if}}
+            </div>
+
+            <div class="details-title">Properties</div>
+            <div class="details">
                 <b>Atomic Mass</b>
                 <p data-test-element-atomic-mass>{{this.currentElement.atomicMass}}</p>
+                <b>Category</b>
+                <p data-test-element-category>{{this.currentElement.category}}</p>
+                <b>Phase</b>
+                <p data-test-element-phase>{{this.currentElement.phase}}</p>
+                {{#if this.currentElement.boil}}
+                    <b>Boiling Point</b>
+                    <p data-test-element-boiling-point>{{this.currentElement.boil}} K</p>
+                {{/if}}
+                {{#if this.currentElement.melt}}
+                    <b>Melting Point</b>
+                    <p data-test-element-melting-point>{{this.currentElement.melt}} K</p>
+                {{/if}}
+                <b>Density</b>
+                <p data-test-element-density>{{this.currentElement.density}} kg/m^3</p>
             </div>
+
+            <div class="details-title">
+                Discovery
+            </div>
+            <div class="details">
+                <b>Discovered By</b>
+                <p data-test-element-discovered-by>{{this.currentElement.discoveredBy}}</p>
+                {{#if this.currentElement.namedBy}}
+                    <b>Named By</b>
+                    <p data-test-element-named-by>{{this.currentElement.namedBy}}</p>
+                {{/if}}
+            </div>
+        </div>
         {{/if}}
     </div>
 </div>
