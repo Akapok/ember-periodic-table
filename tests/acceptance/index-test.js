@@ -18,24 +18,24 @@ module('Acceptance | index', function (hooks) {
 
     // Test first element
     assert
-      .dom('.element-container:first-child [data-test-element-number]')
+      .dom('[data-test-element-id="1"] [data-test-element-number]')
       .hasText('1', 'element number is rendered');
     assert
-      .dom('.element-container:first-child [data-test-element-symbol]')
+      .dom('[data-test-element-id="1"] [data-test-element-symbol]')
       .hasText('H', 'element symbol is rendered');
     assert
-      .dom('.element-container:first-child [data-test-element-name]')
+      .dom('[data-test-element-id="1"] [data-test-element-name]')
       .hasText('Hydrogen', 'element name is rendered');
 
     // Test another element
     assert
-      .dom('.element-container:nth-child(107) [data-test-element-number]')
+      .dom('[data-test-element-id="107"] [data-test-element-number]')
       .hasText('107', 'element number is rendered');
     assert
-      .dom('.element-container:nth-child(107) [data-test-element-symbol]')
+      .dom('[data-test-element-id="107"] [data-test-element-symbol]')
       .hasText('Bh', 'element symbol is rendered');
     assert
-      .dom('.element-container:nth-child(107) [data-test-element-name]')
+      .dom('[data-test-element-id="107"] [data-test-element-name]')
       .hasText('Bohrium', 'element name is rendered');
   });
 
@@ -43,7 +43,7 @@ module('Acceptance | index', function (hooks) {
     await visit('/');
 
     // Click on the first element
-    await click('.element-container:first-child [data-test-element]');
+    await click('[data-test-element-id="1"] [data-test-element]');
 
     assert
       .dom('[data-test-element-details]')
@@ -93,7 +93,7 @@ module('Acceptance | index', function (hooks) {
       .hasText('Antoine Lavoisier', 'element named by is rendered');
 
     // Switch element
-    await click('.element-container:nth-child(107) [data-test-element]');
+    await click('[data-test-element-id="107"] [data-test-element]');
 
     assert
       .dom('.element-details [data-test-element-symbol]')

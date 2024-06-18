@@ -1,7 +1,10 @@
 <div>
     <div class="grid">
+        {{!-- template-lint-disable require-input-label --}}
+        <Input @type="text" class="browser-default searchbar" @value={{this.searchInput}} {{on "keyup" this.performSearch}} placeholder="Search by name, symbol or number"/>
+
         {{#each this.model as |element|}}
-        <div class="element-container" style={{element.gridPosition}}>
+        <div class="element-container {{element.searchState}}" style={{element.gridPosition}} data-test-element-id={{element.number}}>
             <Element @element={{element}} {{on "click" (fn this.openElementDetails element)}} class="element-hover" />
         </div>
         {{/each}}

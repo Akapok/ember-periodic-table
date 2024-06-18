@@ -37,6 +37,8 @@ export default class ElementModel extends Model {
   @attr image;
   @attr block;
 
+  @attr('string') searchState;
+
   get gridPosition() {
     return htmlSafe(
       `grid-row-start: ${this.ypos}; grid-column-start: ${this.xpos}`,
