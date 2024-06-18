@@ -3,11 +3,14 @@
 <div class="app">
     <div class="header">
         <h1>Periodic Table</h1>
+        <LinkTo @route={{this.routeToTransitionTo}} class="waves-effect waves-light btn" data-test-link-route>
+            {{this.buttonLabel}}
+        </LinkTo>
     </div>
     {{outlet}}
     <div class="footer">
         <small>
-            Made with Ember.js ♥
+            Made with ♥ with Ember.js 
         </small>
     </div>
 </div>
