@@ -1,5 +1,11 @@
 import { module, test } from 'qunit';
-import { visit, click } from '@ember/test-helpers';
+import {
+  visit,
+  click,
+  typeIn,
+  fillIn,
+  triggerEvent,
+} from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-periodic-table/tests/helpers';
 
 module('Acceptance | index', function (hooks) {
@@ -18,24 +24,24 @@ module('Acceptance | index', function (hooks) {
 
     // Test first element
     assert
-      .dom('.element-container:first-child [data-test-element-number]')
+      .dom('[data-test-element-id="1"] [data-test-element-number]')
       .hasText('1', 'element number is rendered');
     assert
-      .dom('.element-container:first-child [data-test-element-symbol]')
+      .dom('[data-test-element-id="1"] [data-test-element-symbol]')
       .hasText('H', 'element symbol is rendered');
     assert
-      .dom('.element-container:first-child [data-test-element-name]')
+      .dom('[data-test-element-id="1"] [data-test-element-name]')
       .hasText('Hydrogen', 'element name is rendered');
 
     // Test another element
     assert
-      .dom('.element-container:nth-child(107) [data-test-element-number]')
+      .dom('[data-test-element-id="107"] [data-test-element-number]')
       .hasText('107', 'element number is rendered');
     assert
-      .dom('.element-container:nth-child(107) [data-test-element-symbol]')
+      .dom('[data-test-element-id="107"] [data-test-element-symbol]')
       .hasText('Bh', 'element symbol is rendered');
     assert
-      .dom('.element-container:nth-child(107) [data-test-element-name]')
+      .dom('[data-test-element-id="107"] [data-test-element-name]')
       .hasText('Bohrium', 'element name is rendered');
   });
 
@@ -43,7 +49,7 @@ module('Acceptance | index', function (hooks) {
     await visit('/');
 
     // Click on the first element
-    await click('.element-container:first-child [data-test-element]');
+    await click('[data-test-element-id="1"] [data-test-element]');
 
     assert
       .dom('[data-test-element-details]')
@@ -93,7 +99,7 @@ module('Acceptance | index', function (hooks) {
       .hasText('Antoine Lavoisier', 'element named by is rendered');
 
     // Switch element
-    await click('.element-container:nth-child(107) [data-test-element]');
+    await click('[data-test-element-id="107"] [data-test-element]');
 
     assert
       .dom('.element-details [data-test-element-symbol]')
@@ -141,5 +147,165 @@ module('Acceptance | index', function (hooks) {
     assert
       .dom('.element-details [data-test-element-named-by]')
       .doesNotExist('element named by is not rendered');
+  });
+
+  // new module
+  module('search feature', function () {
+    function getDimmedElements() {
+      return document.querySelectorAll('.dimmed').length;
+    }
+
+    function getHighlightedElements() {
+      return document.querySelectorAll('.highlighted').length;
+    }
+
+    test('[Complete] it highlights 1 element / search by name', async function (assert) {
+      await visit('/');
+
+      // Search for 'Hydrogen'
+      await typeIn('.searchbar', 'Hydrogen');
+
+      assert
+        .dom('[data-test-element-id="1"]')
+        .hasClass('highlighted', 'element Hydrogen is highlighted');
+
+      assert.strictEqual(
+        getHighlightedElements(),
+        1,
+        'only 1 element is highlighted',
+      );
+
+      assert.strictEqual(
+        getDimmedElements(),
+        118,
+        'the other elements are dimmed',
+      );
+
+      // Search for 'Bohrium'
+      await fillIn('.searchbar', ''); // Clear the input search
+      await typeIn('.searchbar', 'Bohrium');
+
+      assert
+        .dom('[data-test-element-id="107"]')
+        .hasClass('highlighted', 'element Bohrium is highlighted');
+
+      assert.strictEqual(
+        getHighlightedElements(),
+        1,
+        'only 1 element is highlighted',
+      );
+
+      assert.strictEqual(
+        getDimmedElements(),
+        118,
+        'the other elements are dimmed',
+      );
+
+      // Clear search
+      await fillIn('.searchbar', '');
+      await triggerEvent('.searchbar', 'keyup'); // mock key up event
+
+      assert.strictEqual(
+        getHighlightedElements(),
+        0,
+        'no element is highlighted',
+      );
+
+      assert.strictEqual(getDimmedElements(), 0, 'no element is dimmed');
+    });
+
+    test('[Partial] it highlights several elements  / search by name', async function (assert) {
+      await visit('/');
+
+      await typeIn('.searchbar', 'Al');
+
+      assert.strictEqual(
+        getHighlightedElements(),
+        8,
+        '8 elements are highlighted',
+      );
+
+      assert.strictEqual(
+        getDimmedElements(),
+        111,
+        'the other elements are dimmed',
+      );
+
+      await fillIn('.searchbar', ''); // Clear the input search
+      await typeIn('.searchbar', 'io');
+
+      assert.strictEqual(
+        getHighlightedElements(),
+        2,
+        '2 elements are highlighted',
+      );
+
+      assert.strictEqual(
+        getDimmedElements(),
+        117,
+        'the other elements are dimmed',
+      );
+    });
+
+    test('[Complete] it highlights correct element with uppercase and lowercase search  / search by name', async function (assert) {
+      await visit('/');
+
+      // Search for 'Hydrogen'
+      await typeIn('.searchbar', 'HYDROGEN');
+
+      assert
+        .dom('[data-test-element-id="1"]')
+        .hasClass('highlighted', 'element Hydrogen is highlighted');
+
+      assert.strictEqual(
+        getHighlightedElements(),
+        1,
+        'only 1 element is highlighted',
+      );
+
+      assert.strictEqual(
+        getDimmedElements(),
+        118,
+        'the other elements are dimmed',
+      );
+
+      await fillIn('.searchbar', ''); // Clear the input search
+      await typeIn('.searchbar', 'hydro');
+
+      assert
+        .dom('[data-test-element-id="1"]')
+        .hasClass('highlighted', 'element Hydrogen is highlighted');
+
+      assert.strictEqual(
+        getHighlightedElements(),
+        1,
+        'only 1 element is highlighted',
+      );
+
+      assert.strictEqual(
+        getDimmedElements(),
+        118,
+        'the other elements are dimmed',
+      );
+
+      await fillIn('.searchbar', ''); // Clear the input search
+      await typeIn('.searchbar', 'HyDRoGeN');
+
+      assert
+        .dom('[data-test-element-id="1"]')
+        .hasClass('highlighted', 'element Hydrogen is highlighted');
+
+      assert.strictEqual(
+        getHighlightedElements(),
+        1,
+        'only 1 element is highlighted',
+      );
+
+      assert.strictEqual(
+        getDimmedElements(),
+        118,
+        'the other elements are dimmed',
+      );
+    });
   });
 });
