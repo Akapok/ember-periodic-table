@@ -1,0 +1,79 @@
+<div {{did-insert this.initScreens}}>
+  <div class="rules">
+    <h6>Rules</h6>
+    <p>Click on the elements to swap them and put them in the right order.</p>
+  </div>
+  <SortableObjects
+    @sortEndAction={{this.checkedGameState}}
+    @sortableObjectList={{this.shuffledElements}}
+    @enableSort={{true}}
+    @useSwap={{true}}
+    @inPlace={{true}}
+    @overrideClass="grid"
+  >
+    {{#each this.shuffledElements as |item index|}}
+      <DraggableObject
+        @content={{item}}
+        @isSortable={{true}}
+        @overrideClass="element-container container"
+        style={{this.getElementPosition index}}
+      >
+        <Element
+          @element={{item}}
+          id={{item.id}}
+          data-test-element-id={{item.id}}
+        />
+      </DraggableObject>
+    {{/each}}
+  </SortableObjects>
+</div>
+
+<div class="modal startModal">
+  <div class="modal-content">
+    <h4>Select your difficulty</h4>
+    {{#each this.difficultyOptions as |opt|}}
+      <div class="row">
+        <div class="col">
+          <label>
+            <input
+              class="with-gap"
+              name={{opt.value}}
+              type="radio"
+              checked={{eq this.difficulty opt.value}}
+              value={{opt.value}}
+              {{on "change" (fn (mut this.difficulty) opt.value)}}
+            />
+            <span></span>
+          </label>
+        </div>
+        <div class="col">
+          <b>{{opt.label}}</b>
+          <p>{{opt.description}}</p>
+        </div>
+      </div>
+    {{/each}}
+    <div class="center-align">
+      <a
+        href="#!"
+        {{on "click" this.launchGame}}
+        data-test-start-game
+        class="modal-close btn waves-effect waves-light"
+      >Play !</a>
+    </div>
+  </div>
+</div>
+
+<div class="modal finishModal">
+  <div class="modal-content">
+    <div class="center-align">
+      <h4>Congrats !</h4>
+      <p>You've finished the game !</p>
+      <p>What about trying with another difficulty level ?</p>
+      <a
+        href="#!"
+        {{on "click" this.displayStartScreen}}
+        class="modal-close btn waves-effect waves-light"
+      >Play Again !</a>
+    </div>
+  </div>
+</div>
