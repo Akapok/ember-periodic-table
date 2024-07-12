@@ -1,11 +1,17 @@
 {{#if @element}}
     <div class="element" data-test-element style={{this.backgroundColor}} ...attributes>
+       {{#if @element.number}}
         <div class="small" data-test-element-number>
             {{@element.number}}
         </div>
+        {{/if}}
+        {{#if @element.symbol}}
         <b data-test-element-symbol>{{@element.symbol}}</b>
+        {{/if}}
+        {{#if @element.name}}
         <div class="small" data-test-element-name>
             {{@element.name}}
         </div>
+        {{/if}}
     </div>
 {{/if}}

@@ -3,6 +3,10 @@ import { htmlSafe } from '@ember/template';
 
 export default class ElementComponent extends Component {
   get backgroundColor() {
-    return htmlSafe(`background-color: ${this.args.element.color}`);
+    if (this.args.element.color) {
+      return htmlSafe(`background-color: ${this.args.element.color}`);
+    }
+
+    return 'background-color: lightgrey';
   }
 }
