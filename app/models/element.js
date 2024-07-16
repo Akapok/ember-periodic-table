@@ -1,47 +1,15 @@
 import { htmlSafe } from '@ember/template';
+import { tracked } from '@glimmer/tracking';
 
 export default class Element {
-  id;
-  name;
-  appearance;
-  atomicMass;
-  boil;
-  category;
-  density;
-  discoveredBy;
-  melt;
-  molarHeat;
-  namedBy;
-  number;
-  period;
-  group;
-  phase;
-  source;
-  bohrModelImage;
-  bohrModel3d;
-  spectralImg;
-  summary;
-  symbol;
-  xpos;
-  ypos;
-  wxpos;
-  wypos;
-  shells;
-  electronConfiguration;
-  electronConfigurationSemantic;
-  electronAffinity;
-  electronegativityPauling;
-  ionizationEnergies;
-  cpkHex;
-  image;
-  block;
-
-  searchState;
+  @tracked id;
+  @tracked searchState;
 
   constructor(element) {
-    Object.assign(this, element);
     this.id = element.number;
+    Object.assign(this, element);
   }
+
   get gridPosition() {
     return htmlSafe(
       `grid-row-start: ${this.ypos}; grid-column-start: ${this.xpos}`,
