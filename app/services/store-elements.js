@@ -6,7 +6,7 @@ export default class StoreElementsService extends Service {
   @tracked elements = undefined;
 
   async fetchElements() {
-    let response = await fetch('assets/elements.json');
+    let response = await fetch('/assets/elements.json');
     let elementsJSON = await response.json();
     this.elements = elementsJSON.elements.map(
       (element) => new Element(element),
