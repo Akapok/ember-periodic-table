@@ -1,12 +1,10 @@
 import Route from '@ember/routing/route';
-import Element from 'ember-periodic-table/models/element';
+import { service } from '@ember/service';
 
 export default class IndexRoute extends Route {
-  async model() {
-    let response = await fetch('assets/elements.json');
-    let elementsJSON = await response.json();
-    let elements = elementsJSON.elements;
-    elements = elements.map((element) => new Element(element));
-    return elements;
+  @service storeElements;
+
+  model() {
+    return this.storeElements.elements;
   }
 }
