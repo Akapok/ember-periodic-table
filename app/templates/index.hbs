@@ -33,7 +33,7 @@
             <div class="details-title">Properties</div>
             <div class="details">
                 <b>Atomic Mass</b>
-                <p data-test-element-atomic-mass>{{this.currentElement.atomicMass}}</p>
+                <p data-test-element-atomic-mass>{{this.currentElement.atomic_mass}}</p>
                 <b>Category</b>
                 <p data-test-element-category>{{this.currentElement.category}}</p>
                 <b>Phase</b>
@@ -55,10 +55,10 @@
             </div>
             <div class="details">
                 <b>Discovered By</b>
-                <p data-test-element-discovered-by>{{this.currentElement.discoveredBy}}</p>
-                {{#if this.currentElement.namedBy}}
+                <p data-test-element-discovered-by>{{this.currentElement.discovered_by}}</p>
+                {{#if this.currentElement.named_by}}
                     <b>Named By</b>
-                    <p data-test-element-named-by>{{this.currentElement.namedBy}}</p>
+                    <p data-test-element-named-by>{{this.currentElement.named_by}}</p>
                 {{/if}}
             </div>
         </div>

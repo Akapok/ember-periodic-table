@@ -1,13 +1,12 @@
 import { module, test } from 'qunit';
 
 import { setupTest } from 'ember-periodic-table/tests/helpers';
-
+import Element from 'ember-periodic-table/models/element';
 module('Unit | Model | element', function (hooks) {
   setupTest(hooks);
 
   test('it has a correct gridPosition', function (assert) {
-    let store = this.owner.lookup('service:store');
-    let element = store.createRecord('element', {
+    let element = new Element({
       xpos: 1,
       ypos: 1,
     });
@@ -27,8 +26,7 @@ module('Unit | Model | element', function (hooks) {
   });
 
   test('it has a correct color', function (assert) {
-    let store = this.owner.lookup('service:store');
-    let element = store.createRecord('element', {
+    let element = new Element({
       category: 'diatomic nonmetal',
     });
 
