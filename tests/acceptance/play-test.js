@@ -92,16 +92,16 @@ module('Acceptance | Play', function (hooks) {
 
       // Test first element
       expectedElementsAttr.forEach((attr) => {
-        assert.dom(`[data-test-element-id="Helium"] [${attr}]`).exists();
+        assert.dom(`[data-test-element-id="1"] [${attr}]`).exists();
       });
 
       unexpectedElementsAttr.forEach((attr) => {
-        assert.dom(`[data-test-element-id="Helium"] [${attr}]`).doesNotExist();
+        assert.dom(`[data-test-element-id="1"] [${attr}]`).doesNotExist();
       });
 
       if (!withColor) {
         assert
-          .dom(`[data-test-element-id="Helium"]`)
+          .dom(`[data-test-element-id="1"]`)
           .hasStyle({ backgroundColor: 'rgb(211, 211, 211)' }); //lightgrey color
       }
     },
